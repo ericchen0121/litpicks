@@ -23,15 +23,13 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
     fetchData()
   }, [])
 
-  console.log('schedule games', games)
-
   return (
     <div>
       <div className='flex flex-row'>
         {games.map((game) => {
           const isSelected = selectedGame?.gamePk === game.gamePk
           return (
-            <>
+            <div key={`schedule-${game.gamePk}`} className='w-max'>
               <div
                 className='p-2 mr-1 ml-1 rounded cursor-default'
                 style={{
@@ -60,7 +58,7 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
                   {game.teams.home.team.abbreviation}
                 </div>
               </div>
-            </>
+            </div>
           )
         })}
       </div>

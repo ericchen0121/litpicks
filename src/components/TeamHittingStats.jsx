@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { ordinalSuffixOf } from '@/lib/utils'
 
-function TeamHittingStats({ teamId, vsHand }) {
+function TeamHittingStats({ teamId, vsHand = 'R' }) {
   const [seasonData, setSeasonData] = useState([]) // season data
   const [monthData, setMonthData] = useState([]) // current month data
   const [i01Data, seti01Data] = useState([]) // 1st inning data
@@ -31,7 +31,9 @@ function TeamHittingStats({ teamId, vsHand }) {
         let ig01Res = await fetch(`${statsApi}&sitCodes=ig01`)
         let ig01Data = await ig01Res.json()
         setig01Data(ig01Data.stats)
-      } catch {}
+      } catch (err) {
+        console.error('Error fetching data:', err) // Log the error
+      }
     }
     fetchData()
   }, [])
