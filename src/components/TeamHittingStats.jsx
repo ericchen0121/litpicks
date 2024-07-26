@@ -58,7 +58,7 @@ function TeamHittingStats({ teamId, vsHand }) {
         <span className='font-light text-xs w-12'>Season</span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (
-            <Badge variant='secondary' className='mr-2'>
+            <Badge variant='secondary' className='mr-2' key={`season-${k}`}>
               {ordinalSuffixOf(
                 seasonData
                   .sort((a, b) => b[k] - a[k])
@@ -75,7 +75,7 @@ function TeamHittingStats({ teamId, vsHand }) {
         </span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (
-            <Badge variant='secondary' className='mr-2'>
+            <Badge variant='secondary' className='mr-2' key={`month-${k}`}>
               {ordinalSuffixOf(
                 monthData
                   .sort((a, b) => b[k] - a[k])
@@ -90,7 +90,7 @@ function TeamHittingStats({ teamId, vsHand }) {
         <span className='font-light text-xs w-12'>1st Inn</span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (
-            <Badge variant='secondary' className='mr-2'>
+            <Badge variant='secondary' className='mr-2' key={`1stI-${k}`}>
               {ordinalSuffixOf(
                 i01Data
                   .sort((a, b) => b[k] - a[k])
@@ -105,7 +105,7 @@ function TeamHittingStats({ teamId, vsHand }) {
         <span className='font-light text-xs w-12'>1-6 Inn</span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (
-            <Badge variant='secondary' className='mr-2'>
+            <Badge variant='secondary' className='mr-2' key={`1-6I-${k}`}>
               {ordinalSuffixOf(
                 ig01Data
                   .sort((a, b) => b[k] - a[k])
@@ -120,7 +120,7 @@ function TeamHittingStats({ teamId, vsHand }) {
         <span className='font-light text-xs w-12'>vs. {vsHand}</span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (
-            <Badge variant='secondary' className='mr-2'>
+            <Badge variant='secondary' className='mr-2' key={`vsHand-${k}`}>
               {ordinalSuffixOf(
                 vsHandData
                   .sort((a, b) => b[k] - a[k])
