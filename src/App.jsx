@@ -22,11 +22,11 @@ function App() {
         <div className='text-med'>Team Hitting Ranks</div>
         <TeamHittingStats
           teamId={selectedGame?.teams?.away?.team?.id}
-          vsHand={selectedGame?.teams?.away?.probablePitcher?.pitchHand?.code}
+          vsHand={selectedGame?.teams?.home?.probablePitcher?.pitchHand?.code}
         />
         <TeamHittingStats
           teamId={selectedGame?.teams?.home?.team?.id}
-          vsHand={selectedGame?.teams?.home?.probablePitcher?.pitchHand?.code}
+          vsHand={selectedGame?.teams?.away?.probablePitcher?.pitchHand?.code}
         />
       </div>
       <div className='mb-4'>
