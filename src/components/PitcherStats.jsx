@@ -24,6 +24,7 @@ function PitcherStats({ playerId }) {
       } catch {}
     }
 
+    setData([])
     if (playerId) {
       setPitcherId(playerId)
       fetchData(playerId)
@@ -71,6 +72,8 @@ function PitcherStats({ playerId }) {
       fetchData()
     }
   }, [data])
+
+  if (!playerId) return <></>
 
   return (
     <div>

@@ -11,7 +11,7 @@ function App() {
   const [selectedGame, setSelectedGame] = useState({})
 
   return (
-    <div className='flex flex-col w-full h-full ml-8 mb-12'>
+    <div className='flex flex-col w-full h-screen ml-8 mb-12 items-start justify-start'>
       <div className='mb-8 mt-8'>
         <MLBSchedule
           setSelectedGame={setSelectedGame}

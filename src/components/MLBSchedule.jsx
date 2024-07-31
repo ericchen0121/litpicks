@@ -67,6 +67,9 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
             case 'F':
               header = 'Final'
               break
+            case 'PW':
+              header = game.status.detailedState
+              break
             case 'I':
               header = `${game.linescore.inningState} ${game.linescore.currentInning}`
               break
@@ -78,16 +81,15 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
 
           let lineAway, lineHome
           switch (game.status.statusCode) {
-            case 'O':
-            case 'F':
-            case 'I':
-              lineAway = game.linescore.teams.away.runs
-              lineHome = game.linescore.teams.home.runs
-              break
             case 'P':
             case 'S':
+            case 'PW':
               lineAway = game.teams.away.team.abbreviation
               lineHome = game.teams.home.team.abbreviation
+              break
+            default:
+              lineAway = game.linescore.teams.away.runs
+              lineHome = game.linescore.teams.home.runs
               break
           }
 
