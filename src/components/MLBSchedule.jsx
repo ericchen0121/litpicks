@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react'
-import { format } from 'date-fns'
+import { format, addDays, isSameDay, isToday } from 'date-fns'
+import { cn } from '@/lib/utils'
+import { TeamLogo } from '@/components'
 
 function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
+  const [selectedDay, setSelectedDay] = useState()
   const [games, setGames] = useState([])
   const [filters, setFilters] = useState([]) // 'F': Final, 'I': In-Progress, 'O': 'Game Over', 'S': Scheduled, 'P': Pre-game
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const date = format(new Date(), 'yyyy-MM-dd')
+        const date = format(selectedDay, 'yyyy-MM-dd')
+
         let res = await fetch(
           `https://statsapi.mlb.com/api/v1/schedule?sportId=1&sportId=51&sportId=21&startDate=${date}&endDate=${date}&timeZone=America/New_York&gameType=E&&gameType=S&&gameType=R&&gameType=F&&gameType=D&&gameType=L&&gameType=W&&gameType=A&language=en&leagueId=104&&leagueId=103&&leagueId=160&&leagueId=590&sortBy=gameDate,gameType&hydrate=team,linescore(matchup,runners),xrefId,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)`
         )
@@ -21,13 +26,73 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
     }
 
     fetchData()
+  }, [selectedDay])
+
+  useEffect(() => {
+    setSelectedDay(new Date())
   }, [])
+
+  const handleDayClick = (day) => {
+    setSelectedDay(day)
+  }
 
   return (
     <div>
+      <div className='flex mb-3'>
+        {[-3, -2, -1, 0, 1, 2, 3].map((d) => {
+          const day = addDays(new Date(), d)
+          const isSame = isSameDay(day, selectedDay)
+          return (
+            <div
+              key={`day-${day}`}
+              className={cn(
+                'text-center mr-4 cursor-pointer',
+                isSame ? 'font-bold' : 'text-gray-500'
+              )}
+              onClick={() => handleDayClick(day)}
+            >
+              <div className='text-sm'>
+                {isToday(day) ? 'TODAY' : format(day, 'EEE').toUpperCase()}
+              </div>
+              <div>{format(day, 'MMM d').toUpperCase()} </div>
+            </div>
+          )
+        })}
+      </div>
       <div className='flex flex-row'>
         {games.map((game) => {
+          let header
+          switch (game.status.statusCode) {
+            case 'O':
+            case 'F':
+              header = 'Final'
+              break
+            case 'I':
+              header = `${game.linescore.inningState} ${game.linescore.currentInning}`
+              break
+            case 'P':
+            case 'S':
+              header = format(game.gameDate, 'h:mma')
+              break
+          }
+
+          let lineAway, lineHome
+          switch (game.status.statusCode) {
+            case 'O':
+            case 'F':
+            case 'I':
+              lineAway = game.linescore.teams.away.runs
+              lineHome = game.linescore.teams.home.runs
+              break
+            case 'P':
+            case 'S':
+              lineAway = game.teams.away.team.abbreviation
+              lineHome = game.teams.home.team.abbreviation
+              break
+          }
+
           const isSelected = selectedGame?.gamePk === game.gamePk
+
           return (
             <div key={`schedule-${game.gamePk}`} className='w-max'>
               <div
@@ -38,24 +103,22 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
                 }}
                 onClick={() => setSelectedGame(game)}
               >
-                <div className='text-xs font-mono mb-1'>
-                  {format(game.gameDate, 'h:mma')}
-                </div>
-                <div className='flex flex-row font-semibold text-sm mb-1'>
-                  <img
-                    src={`https://midfield.mlbstatic.com/v1/team/${game.teams.away.team.id}/spots/48`}
-                    style={{ width: 24, height: 24 }}
+                <div className='text-sm font-mono mb-1'>{header}</div>
+                <div className='flex flex-row font-semibold text-lg mb-1 items-center justify-center'>
+                  <TeamLogo
+                    teamId={game.teams.away.team.id}
                     className='mr-1'
+                    size={20}
                   />
-                  {game.teams.away.team.abbreviation}
+                  {lineAway}
                 </div>
-                <div className='flex flex-row font-semibold text-sm'>
-                  <img
-                    src={`https://midfield.mlbstatic.com/v1/team/${game.teams.home.team.id}/spots/48`}
-                    style={{ width: 24, height: 24 }}
+                <div className='flex flex-row font-semibold text-lg items-center justify-center'>
+                  <TeamLogo
+                    teamId={game.teams.home.team.id}
                     className='mr-1'
+                    size={20}
                   />
-                  {game.teams.home.team.abbreviation}
+                  {lineHome}
                 </div>
               </div>
             </div>

@@ -1,0 +1,365 @@
+// https://85798c555f18463c9d3ec7d18778c367.ent-search.us-east1.gcp.elastic-cloud.com/api/as/v1/engines/fangraphs/search.json
+// request:
+// {"query":"zac","search_fields":{"name":{}},"result_fields":{"id":{"raw":{}},"name":{"raw":{}},"lastname":{"raw":{}},"namekorean":{"raw":{}},"debut_season":{"raw":{}},"last_season":{"raw":{}},"birthdate":{"raw":{}},"url":{"raw":{}},"position":{"raw":{}}},"filters":{"all":[]}}
+
+// JSON
+{
+  "meta": {
+    "alerts": [],
+    "warnings": [],
+    "precision": 2,
+    "page": {
+      "current": 1,
+      "total_pages": 34,
+      "total_results": 340,
+      "size": 10
+    },
+    "engine": {
+      "name": "fangraphs",
+      "type": "default"
+    },
+    "request_id": "wtz10gV6QwSEo01C4nI6Dg"
+  },
+  "results": [
+    {
+      "birthdate": {
+        "raw": "1995-08-03T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": 2024.0
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": 2019.0
+      },
+      "name": {
+        "raw": "Zac Gallen"
+      },
+      "position": {
+        "raw": "P"
+      },
+      "url": {
+        "raw": "/players/zac-gallen/19291/stats?position=P"
+      },
+      "lastname": {
+        "raw": "Gallen"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 13.05214,
+        "id": "19291"
+      },
+      "id": {
+        "raw": "19291"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "2001-12-12T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Veen"
+      },
+      "position": {
+        "raw": "OF"
+      },
+      "url": {
+        "raw": "/players/zachary-veen/sa3014516/stats?position=OF"
+      },
+      "lastname": {
+        "raw": "Veen"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 11.281052,
+        "id": "sa3014516"
+      },
+      "id": {
+        "raw": "sa3014516"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1997-11-14T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Leigh"
+      },
+      "position": {
+        "raw": "P"
+      },
+      "url": {
+        "raw": "/players/zachary-leigh/sa3017873/stats?position=P"
+      },
+      "lastname": {
+        "raw": "Leigh"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa3017873"
+      },
+      "id": {
+        "raw": "sa3017873"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1987-01-29T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Oliver"
+      },
+      "position": {
+        "raw": "P"
+      },
+      "url": {
+        "raw": "/players/zachary-oliver/sa328236/stats?position=P"
+      },
+      "lastname": {
+        "raw": "Oliver"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa328236"
+      },
+      "id": {
+        "raw": "sa328236"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1996-07-08T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Law"
+      },
+      "position": {
+        "raw": "C/OF"
+      },
+      "url": {
+        "raw": "/players/zacrey-law/sa829413/stats?position=C/OF"
+      },
+      "lastname": {
+        "raw": "Law"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa829413"
+      },
+      "id": {
+        "raw": "sa829413"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1996-01-28T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Correll"
+      },
+      "position": {
+        "raw": "P"
+      },
+      "url": {
+        "raw": "/players/zachary-correll/sa829071/stats?position=P"
+      },
+      "lastname": {
+        "raw": "Correll"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa829071"
+      },
+      "id": {
+        "raw": "sa829071"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1995-09-14T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Shepherd"
+      },
+      "position": {
+        "raw": "3B"
+      },
+      "url": {
+        "raw": "/players/zachary-shepherd/sa830224/stats?position=3B"
+      },
+      "lastname": {
+        "raw": "Shepherd"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa830224"
+      },
+      "id": {
+        "raw": "sa830224"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "2002-06-24T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Addkison"
+      },
+      "position": {
+        "raw": "P"
+      },
+      "url": {
+        "raw": "/players/zachary-addkison/sa3023284/stats?position=P"
+      },
+      "lastname": {
+        "raw": "Addkison"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa3023284"
+      },
+      "id": {
+        "raw": "sa3023284"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1997-05-29T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Ching"
+      },
+      "position": {
+        "raw": "2B/SS"
+      },
+      "url": {
+        "raw": "/players/zachary-ching/sa1169881/stats?position=2B/SS"
+      },
+      "lastname": {
+        "raw": "Ching"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa1169881"
+      },
+      "id": {
+        "raw": "sa1169881"
+      }
+    },
+    {
+      "birthdate": {
+        "raw": "1996-10-30T00:00:00+00:00"
+      },
+      "last_season": {
+        "raw": null
+      },
+      "namekorean": {
+        "raw": null
+      },
+      "debut_season": {
+        "raw": null
+      },
+      "name": {
+        "raw": "Zac Susi"
+      },
+      "position": {
+        "raw": "C"
+      },
+      "url": {
+        "raw": "/players/zachary-susi/sa3006722/stats?position=C"
+      },
+      "lastname": {
+        "raw": "Susi"
+      },
+      "_meta": {
+        "engine": "fangraphs",
+        "score": 8.756174,
+        "id": "sa3006722"
+      },
+      "id": {
+        "raw": "sa3006722"
+      }
+    }
+  ]
+}

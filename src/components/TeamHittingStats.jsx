@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { ordinalSuffixOf } from '@/lib/utils'
+import { TeamHittingLastX, TeamLogo } from '@/components'
 
 function TeamHittingStats({ teamId, vsHand = 'R' }) {
   const [seasonData, setSeasonData] = useState([]) // season data
@@ -52,10 +53,21 @@ function TeamHittingStats({ teamId, vsHand = 'R' }) {
 
   return (
     <div>
-      <img
-        src={`https://midfield.mlbstatic.com/v1/team/${teamId}/spots/48`}
-        style={{ width: 24 }}
-      />
+      <div className='flex flex-row mb-2'>
+        <TeamLogo teamId={teamId} className='mr-2' />
+        <span className='mr-2'>
+          <TeamHittingLastX teamId={teamId} x={5} />
+        </span>
+        <span className='mr-2'>
+          <TeamHittingLastX teamId={teamId} />
+        </span>
+        <span className='mr-2'>
+          <TeamHittingLastX teamId={teamId} x={20} />
+        </span>
+        <span className='mr-2'>
+          <TeamHittingLastX teamId={teamId} x={30} />
+        </span>
+      </div>
       <div className='flex flex-row mb-2'>
         <span className='font-light text-xs w-12'>Season</span>
         {Object.entries(displayStats).map(([k, v]) => {

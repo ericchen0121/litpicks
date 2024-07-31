@@ -11,39 +11,46 @@ function App() {
   const [selectedGame, setSelectedGame] = useState({})
 
   return (
-    <div className='flex flex-col w-full h-full ml-8'>
+    <div className='flex flex-col w-full h-full ml-8 mb-12'>
       <div className='mb-8 mt-8'>
         <MLBSchedule
           setSelectedGame={setSelectedGame}
           selectedGame={selectedGame}
         />
       </div>
-      <div className='mb-4'>
-        <div className='text-med'>Team Hitting Ranks</div>
-        <TeamHittingStats
-          teamId={selectedGame?.teams?.away?.team?.id}
-          vsHand={selectedGame?.teams?.home?.probablePitcher?.pitchHand?.code}
-        />
-        <TeamHittingStats
-          teamId={selectedGame?.teams?.home?.team?.id}
-          vsHand={selectedGame?.teams?.away?.probablePitcher?.pitchHand?.code}
-        />
+      <div className='mb-16 flex flex-row items-center justify-start'>
+        <div className='mr-24'>
+          <PitcherStatsHeader
+            pitcherInfo={selectedGame?.teams?.away?.probablePitcher}
+            teamId={selectedGame?.teams?.away?.team?.id}
+          />
+          <PitcherStats
+            playerId={selectedGame?.teams?.away?.probablePitcher?.id}
+          />
+        </div>
+        <div>
+          <TeamHittingStats
+            teamId={selectedGame?.teams?.home?.team?.id}
+            vsHand={selectedGame?.teams?.away?.probablePitcher?.pitchHand?.code}
+          />
+        </div>
       </div>
-      <div className='mb-4'>
-        <PitcherStatsHeader
-          pitcherInfo={selectedGame?.teams?.away?.probablePitcher}
-        />
-        <PitcherStats
-          playerId={selectedGame?.teams?.away?.probablePitcher?.id}
-        />
-      </div>
-      <div className='mb-12'>
-        <PitcherStatsHeader
-          pitcherInfo={selectedGame?.teams?.home?.probablePitcher}
-        />
-        <PitcherStats
-          playerId={selectedGame?.teams?.home?.probablePitcher?.id}
-        />
+      <div className='flex flex-row items-center justify-start'>
+        <div className='mr-24'>
+          <PitcherStatsHeader
+            pitcherInfo={selectedGame?.teams?.home?.probablePitcher}
+            teamId={selectedGame?.teams?.home?.team?.id}
+          />
+          <PitcherStats
+            playerId={selectedGame?.teams?.home?.probablePitcher?.id}
+          />
+        </div>
+        <div>
+          <TeamHittingStats
+            teamId={selectedGame?.teams?.away?.team?.id}
+            vsHand={selectedGame?.teams?.home?.probablePitcher?.pitchHand?.code}
+          />
+        </div>
       </div>
     </div>
   )

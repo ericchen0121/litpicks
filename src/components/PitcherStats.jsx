@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { getMLBPitchingFP } from '@/lib/fantasyPoints'
+import { TeamLogo } from '@/components'
 import underdogLogo from '@/assets/underdog.webp'
 import prizePicksLogo from '@/assets/prizepicks.avif'
 
@@ -41,7 +42,7 @@ function PitcherStats({ playerId }) {
             throw new Error(`Network response was not ok for item ${item.id}`)
           }
           const data = await response.json()
-          let isHome = data.gameData.probablePitchers.home.id === pitcherId
+          let isHome = data.gameData.probablePitchers?.home?.id === pitcherId
           let firstInningPlays = data.liveData.plays.allPlays.filter((p) => {
             return p.about.inning === 1 && p.matchup.pitcher.id === pitcherId
           })
@@ -84,16 +85,17 @@ function PitcherStats({ playerId }) {
                 </td>
               )
             })}
+            <td className='p-1'>Avg</td>
+            <td className='p-1'>L3</td>
+            <td className='p-1'>L5</td>
+            <td className='p-1'>L10</td>
           </tr>
           <tr>
             <td>vs</td>
             {data.map((split) => {
               return (
                 <td className='p-1' key={split.game.gamePk}>
-                  <img
-                    src={`https://midfield.mlbstatic.com/v1/team/${split.opponent.id}/spots/48`}
-                    style={{ width: 24 }}
-                  />
+                  <TeamLogo teamId={split.opponent.id} />
                 </td>
               )
             })}
@@ -117,6 +119,37 @@ function PitcherStats({ playerId }) {
                 </td>
               )
             })}
+            <td>
+              {(
+                data
+                  .map((s) => s.stat.outs)
+                  .reduce((acc, curr) => curr + acc, 0) / data.length
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 3)
+                  .map((s) => s.stat.outs)
+                  .reduce((acc, curr) => curr + acc, 0) / 3
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 5)
+                  .map((s) => s.stat.outs)
+                  .reduce((acc, curr) => curr + acc, 0) / 5
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 10)
+                  .map((s) => s.stat.outs)
+                  .reduce((acc, curr) => curr + acc, 0) / 10
+              ).toFixed(1)}
+            </td>
           </tr>
           <tr>
             <td>ERA</td>
@@ -137,6 +170,37 @@ function PitcherStats({ playerId }) {
                 </td>
               )
             })}
+            <td>
+              {(
+                data
+                  .map((s) => s.stat.strikeOuts)
+                  .reduce((acc, curr) => curr + acc, 0) / data.length
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 3)
+                  .map((s) => s.stat.strikeOuts)
+                  .reduce((acc, curr) => curr + acc, 0) / 3
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 5)
+                  .map((s) => s.stat.strikeOuts)
+                  .reduce((acc, curr) => curr + acc, 0) / 5
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 10)
+                  .map((s) => s.stat.strikeOuts)
+                  .reduce((acc, curr) => curr + acc, 0) / 10
+              ).toFixed(1)}
+            </td>
           </tr>
           <tr>
             <td>1stI K</td>
@@ -157,6 +221,37 @@ function PitcherStats({ playerId }) {
                 </td>
               )
             })}
+            <td>
+              {(
+                data
+                  .map((s) => s.stat.earnedRuns)
+                  .reduce((acc, curr) => curr + acc, 0) / data.length
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 3)
+                  .map((s) => s.stat.earnedRuns)
+                  .reduce((acc, curr) => curr + acc, 0) / 3
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 5)
+                  .map((s) => s.stat.earnedRuns)
+                  .reduce((acc, curr) => curr + acc, 0) / 5
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 10)
+                  .map((s) => s.stat.earnedRuns)
+                  .reduce((acc, curr) => curr + acc, 0) / 10
+              ).toFixed(1)}
+            </td>
           </tr>
           <tr>
             <td>1stI R</td>
@@ -177,6 +272,37 @@ function PitcherStats({ playerId }) {
                 </td>
               )
             })}
+            <td>
+              {(
+                data
+                  .map((s) => s.stat.hits)
+                  .reduce((acc, curr) => curr + acc, 0) / data.length
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 3)
+                  .map((s) => s.stat.hits)
+                  .reduce((acc, curr) => curr + acc, 0) / 3
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 5)
+                  .map((s) => s.stat.hits)
+                  .reduce((acc, curr) => curr + acc, 0) / 5
+              ).toFixed(1)}
+            </td>
+            <td>
+              {(
+                data
+                  .slice(data.length - 10)
+                  .map((s) => s.stat.hits)
+                  .reduce((acc, curr) => curr + acc, 0) / 10
+              ).toFixed(1)}
+            </td>
           </tr>
           <tr>
             <td>1stI H</td>

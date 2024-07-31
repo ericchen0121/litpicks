@@ -11,7 +11,7 @@ function PrizePicksProjections({}) {
           `https://api.prizepicks.com/projections?league_id=2&per_page=250&single_stat=true&state_code=CA&game_mode=pickem`
         )
         let data = await res.json()
-        console.log(data)
+
         setData(data)
       } catch {}
     }
