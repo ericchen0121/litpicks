@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { format } from 'date-fns'
+import { format, subMonths } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { ordinalSuffixOf } from '@/lib/utils'
 import { TeamHittingLastX, TeamLogo } from '@/components'
@@ -11,16 +11,34 @@ function TeamHittingStats({ teamId, vsHand = 'R' }) {
   const [vsHandData, setVsHandData] = useState([]) // vs RHP or LHP
   const [ig01Data, setig01Data] = useState([]) // 1-6th inning
   const statsApi = `https://bdfed.stitch.mlbinfra.com/bdfed/stats/team?&env=prod&sportId=1&gameType=R&group=hitting&order=desc&sortStat=runsBattedIn&stats=season&season=2024&limit=30&offset=0`
+  const [subMonthCount, setSubMonthCount] = useState(0)
+
+  // refetch data if month data (ie. on Aug 1, Aug data won't be available, so decrement month and get July data)
   useEffect(() => {
+    const fetchMonthData = async () => {
+      const month = format(subMonths(new Date(), subMonthCount), 'M')
+      let monthRes = await fetch(`${statsApi}&sitCodes=${month}`)
+      let monthData = await monthRes.json()
+      setMonthData(monthData.stats)
+      if (monthData.stats.length === 0) setSubMonthCount(subMonthCount + 1)
+    }
+    if (subMonthCount !== 0) fetchMonthData()
+  }, [subMonthCount])
+
+  useEffect(() => {
+    setSubMonthCount(0)
     const fetchData = async () => {
       try {
         let res = await fetch(statsApi)
         let data = await res.json()
         setSeasonData(data.stats)
-        const month = format(new Date(), 'M')
+
+        const month = format(subMonths(new Date(), subMonthCount), 'M')
         let monthRes = await fetch(`${statsApi}&sitCodes=${month}`)
         let monthData = await monthRes.json()
         setMonthData(monthData.stats)
+        if (monthData.stats.length === 0) setSubMonthCount(subMonthCount + 1)
+
         let i01Res = await fetch(`${statsApi}&sitCodes=i01`)
         let i01Data = await i01Res.json()
         seti01Data(i01Data.stats)
@@ -50,7 +68,7 @@ function TeamHittingStats({ teamId, vsHand = 'R' }) {
     numberOfPitches: 'NP',
     strikeOuts: 'SO',
   }
-
+  console.log('subMonthCount', subMonthCount)
   return (
     <div>
       <div className='flex flex-row mb-2'>
@@ -85,7 +103,7 @@ function TeamHittingStats({ teamId, vsHand = 'R' }) {
       </div>
       <div className='flex flex-row mb-2'>
         <span className='font-light text-xs w-12'>
-          {format(new Date(), 'MMMM')}
+          {format(subMonths(new Date(), subMonthCount), 'MMMM')}
         </span>
         {Object.entries(displayStats).map(([k, v]) => {
           return (

@@ -67,15 +67,15 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
             case 'F':
               header = 'Final'
               break
-            case 'PW':
-              header = game.status.detailedState
-              break
             case 'I':
               header = `${game.linescore.inningState} ${game.linescore.currentInning}`
               break
             case 'P':
             case 'S':
               header = format(game.gameDate, 'h:mma')
+              break
+            default:
+              header = game.status.detailedState.split(' ')[0]
               break
           }
 
@@ -84,17 +84,18 @@ function MLBSchedule({ setSelectedGame = () => {}, selectedGame = {} }) {
             case 'P':
             case 'S':
             case 'PW':
+            case 'DR': // Postponed
               lineAway = game.teams.away.team.abbreviation
               lineHome = game.teams.home.team.abbreviation
               break
             default:
-              lineAway = game.linescore.teams.away.runs
-              lineHome = game.linescore.teams.home.runs
+              lineAway = game?.linescore?.teams.away.runs
+              lineHome = game?.linescore?.teams.home.runs
               break
           }
 
           const isSelected = selectedGame?.gamePk === game.gamePk
-
+          console.log('selected', selectedGame)
           return (
             <div key={`schedule-${game.gamePk}`} className='w-max'>
               <div
